@@ -57,8 +57,8 @@ while($r=mysqli_fetch_assoc($ruangan)){
 
 Tanggal :
 <br>
-<input type="date" name="tanggal" required>
 
+<input type="date" name="tanggal" required min="<?= date('Y-m-d'); ?>">
 <br><br>
 
 Jam Mulai :
@@ -85,6 +85,10 @@ Ajukan Peminjaman
 </button>
 
 </form>
+
+<a href="../index.php">
+Batal
+</a>
 
 </body>
 </html>

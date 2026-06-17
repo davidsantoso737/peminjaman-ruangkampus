@@ -10,4 +10,4 @@ SET status='Disetujui'
 WHERE id_peminjaman='$id'
 ");
 
-header("Location: ../pages/daftar_peminjaman.php");
+header("Location: ../admin/daftar_peminjaman.php");

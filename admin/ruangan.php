@@ -1,4 +1,6 @@
 <?php
+
+include '../config/cek_login.php';
 include '../config/koneksi.php';
 
 $data = mysqli_query(
@@ -22,16 +24,23 @@ $data = mysqli_query(
 
     FROM ruangan r"
 );
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Data Ruangan</title>
+<title>Kelola Ruangan</title>
 </head>
 <body>
 
-<h2>Daftar Ruangan</h2>
+<h2>Kelola Ruangan</h2>
+
+<a href="tambah_ruangan.php">
+➕ Tambah Ruangan
+</a>
+
+<br><br>
 
 <table border="1" cellpadding="10">
 
@@ -41,6 +50,7 @@ $data = mysqli_query(
     <th>Kapasitas</th>
     <th>Lokasi</th>
     <th>Status</th>
+    <th>Aksi</th>
 </tr>
 
 <?php
@@ -50,27 +60,53 @@ while($row=mysqli_fetch_assoc($data)){
 ?>
 
 <tr>
+
     <td><?= $no++; ?></td>
+
     <td><?= $row['nama_ruangan']; ?></td>
+
     <td><?= $row['kapasitas']; ?></td>
+
     <td><?= $row['lokasi']; ?></td>
 
     <td>
+
         <?php
-        if($row['status_ruangan'] == 'Dipinjam'){
+
+        if($row['status_ruangan']=='Dipinjam'){
             echo "🔴 Dipinjam";
         }else{
             echo "🟢 Kosong";
         }
+
         ?>
+
     </td>
+
+    <td>
+
+        <a href="edit_ruangan.php?id=<?= $row['id_ruangan']; ?>">
+            Edit
+        </a>
+
+        |
+
+        <a href="../process/hapus_ruangan.php?id=<?= $row['id_ruangan']; ?>"
+        onclick="return confirm('Yakin hapus?')">
+            Hapus
+        </a>
+
+    </td>
+
 </tr>
 
 <?php } ?>
 
 </table>
 
-<a href="../index.php">
+<br>
+
+<a href="dashboard.php">
 Kembali Dashboard
 </a>
 
