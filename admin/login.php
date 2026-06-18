@@ -1,66 +1,59 @@
 <?php
-
 session_start();
 include '../config/koneksi.php';
 
 if(isset($_POST['login'])){
-
     $username = $_POST['username'];
     $password = md5($_POST['password']);
 
     $cek = mysqli_query($conn,"
-    SELECT *
-    FROM admin
-    WHERE username='$username'
-    AND password='$password'
+        SELECT *
+        FROM admin
+        WHERE username='$username'
+        AND password='$password'
     ");
 
     if(mysqli_num_rows($cek) > 0){
-
         $_SESSION['login'] = true;
-
         header("Location: dashboard.php");
         exit;
-
     }else{
-
         echo "<script>alert('Login gagal');</script>";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Login Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
-<h2>Login Admin</h2>
+<div class="login-wrapper">
+    <div class="login-box">
+        <h2>🔐 Login Admin</h2>
+        <p class="login-subtitle">Masukkan kredensial untuk mengelola sistem</p>
 
-<form method="POST">
+        <form method="POST">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Masukkan username" required autofocus>
+            </div>
 
-Username
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+            </div>
 
-<br>
+            <button type="submit" name="login" class="btn">Login</button>
+        </form>
+    </div>
+</div>
 
-<input type="text" name="username">
-
-<br><br>
-
-Password
-
-<br>
-
-<input type="password" name="password">
-
-<br><br>
-
-<button name="login">
-Login
-</button>
-
-</form>
-
+<script src="../assets/script.js"></script>
 </body>
 </html>

@@ -1,94 +1,78 @@
 <?php
 include '../config/koneksi.php';
 
-$ruangan = mysqli_query(
-    $conn,
-    "SELECT * FROM ruangan"
-);
+$ruangan = mysqli_query($conn, "SELECT * FROM ruangan");
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Form Peminjaman</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Peminjaman</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
-<h2>Form Peminjaman Ruangan</h2>
+<div class="container">
+    <h2>📝 Form Peminjaman Ruangan</h2>
 
-<form action="../process/simpan_peminjaman.php" method="POST">
+    <form action="../process/simpan_peminjaman.php" method="POST">
 
-Nama :
-<br>
-<input type="text" name="nama" required>
+        <div class="form-group">
+            <label>Nama <span class="required">*</span></label>
+            <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap" required>
+        </div>
 
-<br><br>
+        <div class="form-group">
+            <label>NIM <span class="required">*</span></label>
+            <input type="text" name="nim" class="form-control" placeholder="Masukkan NIM (minimal 8 digit)" required>
+        </div>
 
-NIM :
-<br>
-<input type="text" name="nim" required>
+        <div class="form-group">
+            <label>Organisasi <span class="required">*</span></label>
+            <input type="text" name="organisasi" class="form-control" placeholder="Nama organisasi/kegiatan" required>
+        </div>
 
-<br><br>
+        <div class="form-group">
+            <label>Ruangan <span class="required">*</span></label>
+            <select name="ruangan" class="form-control" required>
+                <?php while($r = mysqli_fetch_assoc($ruangan)) { ?>
+                    <option value="<?= $r['id_ruangan']; ?>"><?= $r['nama_ruangan']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
 
-Organisasi :
-<br>
-<input type="text" name="organisasi" required>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Tanggal <span class="required">*</span></label>
+                <input type="date" name="tanggal" class="form-control" required min="<?= date('Y-m-d'); ?>">
+            </div>
 
-<br><br>
+            <div class="form-group">
+                <label>Jam Mulai <span class="required">*</span></label>
+                <input type="time" name="mulai" class="form-control" required>
+            </div>
 
-Ruangan :
-<br>
+            <div class="form-group">
+                <label>Jam Selesai <span class="required">*</span></label>
+                <input type="time" name="selesai" class="form-control" required>
+            </div>
+        </div>
 
-<select name="ruangan">
+        <div class="form-group">
+            <label>Keperluan <span class="required">*</span></label>
+            <textarea name="keperluan" class="form-control" placeholder="Jelaskan keperluan peminjaman" required></textarea>
+        </div>
 
-<?php
-while($r=mysqli_fetch_assoc($ruangan)){
-?>
+        <div class="btn-group">
+            <button type="submit" class="btn">Ajukan Peminjaman</button>
+            <a href="../index.php" class="btn">Batal</a>
+        </div>
 
-<option value="<?= $r['id_ruangan']; ?>">
-<?= $r['nama_ruangan']; ?>
-</option>
+    </form>
+</div>
 
-<?php } ?>
-
-</select>
-
-<br><br>
-
-Tanggal :
-<br>
-
-<input type="date" name="tanggal" required min="<?= date('Y-m-d'); ?>">
-<br><br>
-
-Jam Mulai :
-<br>
-<input type="time" name="mulai" required>
-
-<br><br>
-
-Jam Selesai :
-<br>
-<input type="time" name="selesai" required>
-
-<br><br>
-
-Keperluan :
-<br>
-
-<textarea name="keperluan" required></textarea>
-
-<br><br>
-
-<button type="submit">
-Ajukan Peminjaman
-</button>
-
-</form>
-
-<a href="../index.php">
-Batal
-</a>
-
+<script src="../assets/script.js"></script>
 </body>
 </html>

@@ -18,54 +18,52 @@ $kosong = $ruangan - $dipinjam;
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Dashboard User</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Peminjaman Ruangan</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<h1>Sistem Peminjaman Ruangan Kampus</h1>
+<div class="container">
+    <h1>🏛️ Sistem Peminjaman Ruangan</h1>
+    <p class="subtitle">Kelola peminjaman ruangan kampus dengan mudah</p>
 
-<hr>
+    <hr>
 
-<h3>Informasi Ruangan Hari Ini</h3>
+    <h3>📊 Informasi Ruangan Hari Ini</h3>
 
-<p>Total Ruangan : <?= $ruangan; ?></p>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number"><?= $ruangan; ?></div>
+            <div class="stat-label"><span class="dot dot-purple"></span> Total Ruangan</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number"><?= $dipinjam; ?></div>
+            <div class="stat-label"><span class="dot dot-red"></span> Dipinjam</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number"><?= $kosong; ?></div>
+            <div class="stat-label"><span class="dot dot-green"></span> Kosong</div>
+        </div>
+    </div>
 
-<p>
-🔴 Ruangan Dipinjam :
-<?= $dipinjam; ?>
-</p>
+    <hr>
 
-<p>
-🟢 Ruangan Kosong :
-<?= $kosong; ?>
-</p>
+    <h3>📌 Menu Pengguna</h3>
+    <div class="menu-grid">
+        <a href="pages/ruangan.php" class="btn">📋 Lihat Daftar Ruangan</a>
+        <a href="pages/tambah_peminjaman.php" class="btn">📝 Ajukan Peminjaman</a>
+        <a href="pages/status_peminjaman.php" class="btn">📄 Status Pengajuan</a>
+    </div>
 
-<hr>
+    <hr>
 
-<h3>Menu Pengguna</h3>
+    <a href="admin/login.php" class="btn btn-outline btn-sm">🔐 Login Admin</a>
+</div>
 
-<a href="pages/ruangan.php">
-Lihat Daftar Ruangan
-</a>
-
-<br><br>
-
-<a href="pages/tambah_peminjaman.php">
-Ajukan Peminjaman
-</a>
-
-<br><br>
-
-<a href="pages/status_peminjaman.php">
-Lihat Status Pengajuan
-</a>
-<hr>
-
-<a href="admin/login.php">
-🔐 Login Admin
-</a>
-
+<script src="assets/script.js"></script>
 </body>
 </html>
